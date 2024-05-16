@@ -1,9 +1,10 @@
+// Kanban.tsx
 "use client";
 import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from "@/lib/data";
 import { useEffect, useState } from "react";
 import Tarea from '../tareas/tarea';
 
-const Kanban = () => {
+const Kanban = ({ onButtonClick }) => {
     const [tareasPendientes, setTareasPendientes] = useState([]);
     const [tareasEnProgreso, setTareasEnProgreso] = useState([]);
     const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
@@ -16,6 +17,7 @@ const Kanban = () => {
         }
         get()
       }, []);
+
       return (
         <>
           <h1 className='text-center m-4'>Bienvenido a mi sitio web</h1>
@@ -40,7 +42,7 @@ const Kanban = () => {
             </div>
           </div>
           <div className="text-center">
-            <button className="">Añadir tarea</button>
+            <button className="" onClick={onButtonClick}>Añadir tarea</button>
           </div>
         </>
       );
