@@ -32,7 +32,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Kanban onButtonClick={handleButtonClick} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas}/>
+      <Kanban onButtonClick={handleButtonClick} onUpdate={handleUpdate} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas}/>
       {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate}/>}
     </>
   );

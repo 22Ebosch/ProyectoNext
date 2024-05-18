@@ -37,3 +37,12 @@ export async function crearTarea(data) {
   })
   return tarea;
 }
+
+export async function eliminarTarea(id) {
+  const tareaEliminada = await prisma.tarea.delete({
+    where: {
+      id: id,
+    },
+  });
+  return tareaEliminada;
+}

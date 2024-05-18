@@ -4,7 +4,7 @@ import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from "
 import { useEffect, useState } from "react";
 import Tarea from '../tareas/tarea';
 
-const Kanban = ({ onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinalizadas }) => {
+const Kanban = ({ onUpdate, onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinalizadas }) => {
 
       return (
         <>
@@ -13,19 +13,19 @@ const Kanban = ({ onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinal
             <div className="w-1/4 bg-red-200 p-2 rounded">
               <h2 className="font-bold mb-2">Pendientes</h2>
               {tareasPendientes.map((tarea) => (
-                <Tarea key={tarea.id}  tarea={tarea} />
+                 <Tarea key={tarea.id}  tarea={tarea} onUpdate={onUpdate} />
               ))}
             </div>
             <div className="w-1/4 bg-green-200 p-2 rounded">
               <h2 className="font-bold mb-2">En Progreso</h2>
               {tareasEnProgreso.map((tarea) => (
-                <Tarea  key={tarea.id}  tarea={tarea} />
+                 <Tarea key={tarea.id}  tarea={tarea} onUpdate={onUpdate} />
               ))}
             </div>
             <div className="w-1/4 bg-blue-200 p-2 rounded">
               <h2 className="font-bold mb-2">Finalizadas</h2>
               {tareasFinalizadas.map((tarea) => (
-                <Tarea  key={tarea.id}  tarea={tarea} />
+                 <Tarea key={tarea.id}  tarea={tarea} onUpdate={onUpdate} />
               ))}
             </div>
           </div>
