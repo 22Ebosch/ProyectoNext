@@ -1,4 +1,3 @@
-// HomePage.tsx
 "use client"
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -11,11 +10,18 @@ const HomePage = () => {
   const [tareasPendientes, setTareasPendientes] = useState([]);
   const [tareasEnProgreso, setTareasEnProgreso] = useState([]);
   const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
-  
+  const [tareaEditando, setTareaEditando] = useState(null);
+
   const handleButtonClick = () => {
     setMostrarPopUp(true);
   }
 
+  const handleEdit = (tarea) => {
+    setTareaEditando(tarea);
+    setMostrarPopUp(true);
+    console.log("page.tsx", tarea);
+  };
+  
   const handleClose = () => {
     setMostrarPopUp(false);
   }
@@ -32,8 +38,8 @@ const HomePage = () => {
 
   return (
     <>
-      <Kanban onButtonClick={handleButtonClick} onUpdate={handleUpdate} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas}/>
-      {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate}/>}
+      <Kanban onButtonClick={handleButtonClick} onUpdate={handleUpdate} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} />
+      {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate} tarea={tareaEditando} />}
     </>
   );
 };

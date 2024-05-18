@@ -1,11 +1,15 @@
-// Tarea.jsx
 import React from 'react';
 import { eliminarTarea } from '@/lib/data';
 
-const Tarea = ({ tarea, onUpdate }) => {
+const Tarea = ({ tarea, onUpdate, onEdit }) => {
   const handleDelete = async () => {
     await eliminarTarea(tarea.id);
     onUpdate();
+  };
+
+  const handleClick = () => {
+    onEdit(tarea);
+    console.log("tarea.tsx", tarea)
   };
 
   return (
@@ -13,7 +17,7 @@ const Tarea = ({ tarea, onUpdate }) => {
       <div className='text-right absolute right-0 top-0 invisible group-hover:visible mr-3'>
         <a onClick={handleDelete} className="text-red-500 underline cursor-pointer">Eliminar</a>
       </div>
-      <h1 className="text-2xl">{tarea.titulo}</h1>
+      <h1 onClick={handleClick} className="text-2xl cursor-pointer">{tarea.titulo}</h1>
       <p className="text-base">{tarea.descripcion}</p>
     </div>
   );

@@ -46,3 +46,13 @@ export async function eliminarTarea(id) {
   });
   return tareaEliminada;
 }
+
+export async function actualizarTarea(id, data) {
+  const tareaActualizada = await prisma.tarea.update({
+    where: {
+      id: id,
+    },
+    data: data,
+  });
+  return tareaActualizada;
+}
