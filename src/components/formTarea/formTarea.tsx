@@ -3,14 +3,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { crearTarea } from '@/lib/data'
 import { useRouter } from 'next/navigation';
-import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from '@/lib/data';
-
 
 const FormTarea = ({ onClose }) => {
-    const router = useRouter()
-    const [tareasPendientes, setTareasPendientes] = useState([]);
-    const [tareasEnProgreso, setTareasEnProgreso] = useState([]);
-    const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
     const [formData, setFormData] = useState({
         titulo: '',
         descripcion: '',
@@ -26,32 +20,9 @@ const FormTarea = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         await crearTarea(formData);
         onClose();
     };
-
-    useEffect(() => {
-
-        async function obtenerTareasPendientes() {
-            const tareas = await getTareasPendientes();
-            setTareasPendientes(tareas);
-        }
-    
-        async function obtenerTareasEnProgreso() {
-            const tareas = await getTareasEnProgreso(); 
-            setTareasEnProgreso(tareas);
-        }
-    
-        async function obtenerTareasFinalizadas() {
-            const tareas = await getTareasFinalizadas(); 
-            setTareasFinalizadas(tareas);
-        }
-    
-        obtenerTareasPendientes();
-        obtenerTareasEnProgreso();
-        obtenerTareasFinalizadas();
-    }, [formData]);
 
     return (
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md">

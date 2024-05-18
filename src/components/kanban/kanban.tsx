@@ -1,4 +1,3 @@
-// Kanban.tsx
 "use client";
 import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from "@/lib/data";
 import { useEffect, useState } from "react";
