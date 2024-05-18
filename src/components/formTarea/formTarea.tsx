@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { crearTarea } from '@/lib/data'
 import { useRouter } from 'next/navigation';
 
-const FormTarea = ({ onClose }) => {
+const FormTarea = ({ onClose, onUpdate }) => {
     const [formData, setFormData] = useState({
         titulo: '',
         descripcion: '',
@@ -20,7 +20,9 @@ const FormTarea = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await crearTarea(formData);
+    
+        const nuevaTarea = await crearTarea(formData);
+        onUpdate(nuevaTarea);
         onClose();
     };
 

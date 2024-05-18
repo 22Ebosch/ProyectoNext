@@ -1,21 +1,10 @@
+
 "use client";
 import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from "@/lib/data";
 import { useEffect, useState } from "react";
 import Tarea from '../tareas/tarea';
 
-const Kanban = ({ onButtonClick }) => {
-    const [tareasPendientes, setTareasPendientes] = useState([]);
-    const [tareasEnProgreso, setTareasEnProgreso] = useState([]);
-    const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
-    
-    useEffect(() => {
-        async function get() {
-            setTareasPendientes(await getTareasPendientes());
-            setTareasEnProgreso(await getTareasEnProgreso());
-            setTareasFinalizadas(await getTareasFinalizadas());
-        }
-        get()
-      }, []);
+const Kanban = ({ onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinalizadas }) => {
 
       return (
         <>
