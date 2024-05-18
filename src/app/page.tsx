@@ -19,11 +19,11 @@ const HomePage = () => {
   const handleEdit = (tarea) => {
     setTareaEditando(tarea);
     setMostrarPopUp(true);
-    console.log("page.tsx", tarea);
   };
   
   const handleClose = () => {
     setMostrarPopUp(false);
+    setTareaEditando(null);
   }
 
   const handleUpdate = async () => {

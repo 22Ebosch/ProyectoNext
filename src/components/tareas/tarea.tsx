@@ -9,7 +9,6 @@ const Tarea = ({ tarea, onUpdate, onEdit }) => {
 
   const handleClick = () => {
     onEdit(tarea);
-    console.log("tarea.tsx", tarea)
   };
 
   return (
