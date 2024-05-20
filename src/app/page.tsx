@@ -3,7 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Kanban from '../components/kanban/kanban';
 import PopUp from '@/components/popUp/popUp';
-import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas } from '@/lib/data';
+import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas, actualizarEstadoTarea } from '@/lib/data';
 
 const HomePage = () => {
   const [mostrarPopUp, setMostrarPopUp] = useState(false);
@@ -30,15 +30,23 @@ const HomePage = () => {
     setTareasPendientes(await getTareasPendientes());
     setTareasEnProgreso(await getTareasEnProgreso());
     setTareasFinalizadas(await getTareasFinalizadas());
+    console.log('Actualizando 1')
   }
 
+  const handleDrop = async (e, nuevaCategoria) => {
+    console.log('Actualizando')
+    let id = e.dataTransfer.getData('tarea_id');
+    await actualizarEstadoTarea(id, nuevaCategoria);
+    await handleUpdate();
+  };
+  
   useEffect(() => {
     handleUpdate();
   }, []);
 
   return (
     <>
-      <Kanban onButtonClick={handleButtonClick} onUpdate={handleUpdate} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} />
+      <Kanban onUpdate={handleDrop} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} />
       {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate} tarea={tareaEditando} />}
     </>
   );

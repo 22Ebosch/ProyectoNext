@@ -56,3 +56,16 @@ export async function actualizarTarea(id, data) {
   });
   return tareaActualizada;
 }
+
+export async function actualizarEstadoTarea(id, status) {
+  const tareaActualizada = await prisma.tarea.update({
+    where: {
+      id: Number(id),
+    },
+    data: {
+      status: status,
+    },
+  });
+  console.log(tareaActualizada);
+  return tareaActualizada;
+}
