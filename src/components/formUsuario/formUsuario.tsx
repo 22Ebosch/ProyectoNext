@@ -22,16 +22,17 @@ const FormUsuario = ({ onLogin }) => {
     };
   
     const handleLogin = async (e) => {
-      e.preventDefault();
-      const usuarios = await obtenerUsuarios();
-      const usuarioValido = usuarios.find(usuario => usuario.email === email && usuario.contrasena === contrasena);
-      if (usuarioValido) {
-        setUsuario(usuarioValido);
-        onLogin(usuarioValido);
-      } else {
-        alert('Email o contraseña incorrectos.');
-      }
-    };
+        e.preventDefault();
+        const usuarios = await obtenerUsuarios();
+        const usuarioValido = usuarios.find(usuario => usuario.email === email && usuario.contrasena === contrasena);
+        if (usuarioValido) {
+          setUsuario(usuarioValido);
+          onLogin(usuarioValido);
+        } else {
+          alert('Email o contraseña incorrectos.');
+        }
+      };
+      
   
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">

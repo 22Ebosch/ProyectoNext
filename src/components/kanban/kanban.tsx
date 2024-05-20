@@ -1,14 +1,21 @@
 "use client";
 import Tarea from '../tareas/tarea';
 import { useState, useEffect } from 'react'
-import { actualizarEstadoTarea } from '@/lib/data';
+import { eliminarUsuario ,actualizarEstadoTarea } from '@/lib/data';
+import { FaUserCircle } from 'react-icons/fa';
 
-const Kanban = ({ onUpdate, onEdit, onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinalizadas }) => {
+const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPendientes, tareasEnProgreso, tareasFinalizadas }) => {
 
   const [tareas, setTareas] = useState([...tareasPendientes, ...tareasEnProgreso, ...tareasFinalizadas]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onDragOver = (e) => {
     e.preventDefault();
+  };
+  
+  const handleDeleteUser = async () => {
+    await eliminarUsuario(usuario.id);
+    onLogout();
   };
 
   const handleDrop = async (e, nuevaCategoria) => {
@@ -21,9 +28,19 @@ const Kanban = ({ onUpdate, onEdit, onButtonClick, tareasPendientes, tareasEnPro
       return prevTareas.map(tarea => tarea.id === id ? tareaActualizada : tarea);
     });
   };
-
+  useEffect(() => {
+    console.log('Valor actual de isOpen:', isOpen);
+    console.log('Usuario:', usuario);
+  }, [isOpen]);
   return (
     <>
+      <FaUserCircle className="absolute right-4 top-4 cursor-pointer" size={32} onClick={() => setIsOpen(!isOpen)} />
+      {isOpen && usuario && (
+        <div className="absolute right-4 mt-12 bg-white text-black p-4 rounded shadow-md">
+          <p><strong>Email:</strong> {usuario.email}</p>
+          <button className="bg-red-500 text-white mt-4 p-2 rounded" onClick={handleDeleteUser}>Eliminar usuario</button>
+        </div>
+      )}
       <h1 className='text-center m-4'>Bienvenido a mi sitio web</h1>
       <div className="flex justify-around p-4 items-start">
         <div className="w-1/4 bg-red-200 p-2 rounded" onDragOver={onDragOver} onDrop={(e) => handleDrop(e, 'PENDIENTE')}>

@@ -13,7 +13,8 @@ const HomePage = () => {
   const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
   const [tareaEditando, setTareaEditando] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const [usuario, setUsuario] = useState(null);
+
   const handleButtonClick = () => {
     setMostrarPopUp(true);
   }
@@ -45,13 +46,17 @@ const HomePage = () => {
   useEffect(() => {
     handleUpdate();
   }, []);
-  
+
   if (!isLoggedIn) {
-    return <FormUsuario onLogin={() => setIsLoggedIn(true)} />
+    return <FormUsuario onLogin={(usuarioValido) => {
+      setIsLoggedIn(true);
+      setUsuario(usuarioValido);
+    }} />
   }
+  
   return (
     <>
-      <Kanban onUpdate={handleDrop} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} />
+      <Kanban usuario={usuario} onUpdate={handleDrop} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} onLogout={() => setIsLoggedIn(false)} />
       {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate} tarea={tareaEditando} />}
     </>
   );
