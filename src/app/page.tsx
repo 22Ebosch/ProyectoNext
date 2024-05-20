@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Kanban from '../components/kanban/kanban';
 import PopUp from '@/components/popUp/popUp';
 import { getTareasPendientes, getTareasEnProgreso, getTareasFinalizadas, actualizarEstadoTarea } from '@/lib/data';
+import FormUsuario from '@/components/formUsuario/formUsuario';
 
 const HomePage = () => {
   const [mostrarPopUp, setMostrarPopUp] = useState(false);
@@ -11,7 +12,8 @@ const HomePage = () => {
   const [tareasEnProgreso, setTareasEnProgreso] = useState([]);
   const [tareasFinalizadas, setTareasFinalizadas] = useState([]);
   const [tareaEditando, setTareaEditando] = useState(null);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   const handleButtonClick = () => {
     setMostrarPopUp(true);
   }
@@ -43,7 +45,10 @@ const HomePage = () => {
   useEffect(() => {
     handleUpdate();
   }, []);
-
+  
+  if (!isLoggedIn) {
+    return <FormUsuario onLogin={() => setIsLoggedIn(true)} />
+  }
   return (
     <>
       <Kanban onUpdate={handleDrop} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} />

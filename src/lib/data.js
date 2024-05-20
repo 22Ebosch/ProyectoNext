@@ -69,3 +69,45 @@ export async function actualizarEstadoTarea(id, status) {
   console.log(tareaActualizada);
   return tareaActualizada;
 }
+
+export async function crearUsuario(data) {
+  const { contrasena, email } = data;
+
+  const usuario = await prisma.usuario.create({
+    data: data,
+  })
+  return usuario;
+}
+
+export async function obtenerUsuarios() {
+  const usuarios = await prisma.usuario.findMany();
+  return usuarios;
+}
+
+export async function actualizarUsuario(id, data) {
+  const usuarioActualizado = await prisma.usuario.update({
+    where: {
+      id: id,
+    },
+    data: data,
+  });
+  return usuarioActualizado;
+}
+
+export async function eliminarUsuario(id) {
+  const usuarioEliminado = await prisma.usuario.delete({
+    where: {
+      id: id,
+    },
+  });
+  return usuarioEliminado;
+}
+
+export async function obtenerUsuarioPorEmail(email) {
+  const usuario = await prisma.usuario.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  return usuario;
+}
