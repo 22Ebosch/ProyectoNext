@@ -26,7 +26,6 @@ const FormTarea = ({ onClose, onUpdate, tarea }) => {
   
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(tarea);
         if (tarea) {
           // Estás editando una tarea existente
           const tareaActualizada = await actualizarTarea(tarea.id, formData);
