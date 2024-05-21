@@ -34,8 +34,6 @@ const FormUsuario = ({ onLogin }) => {
       }
     };
     
-      
-  
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
           <form className="p-8 bg-white rounded shadow-md w-80">

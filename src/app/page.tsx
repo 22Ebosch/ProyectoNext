@@ -63,7 +63,7 @@ const HomePage = () => {
   
   return (
     <>
-      <Kanban usuario={usuario} onUpdate={handleDrop} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} onLogout={() => setIsLoggedIn(false)} />
+      <Kanban usuario={usuario} onUpdate={handleUpdate} onButtonClick={handleButtonClick} onEdit={handleEdit} tareasPendientes={tareasPendientes} tareasEnProgreso={tareasEnProgreso} tareasFinalizadas={tareasFinalizadas} onLogout={() => setIsLoggedIn(false)} />
       {mostrarPopUp && <PopUp onClose={handleClose} onUpdate={handleUpdate} tarea={tareaEditando} />}
     </>
   );
