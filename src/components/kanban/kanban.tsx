@@ -25,10 +25,7 @@ const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPend
   
   const handleDrop = async (e, nuevaCategoria) => {
     let id = e.dataTransfer.getData('tarea_id');
-    // Actualiza el estado de la tarea en la base de datos
     const tareaActualizada = await actualizarEstadoTarea(id, nuevaCategoria);
-
-    // Actualiza el estado de las tareas en el cliente
     setTareas(prevTareas => {
       return prevTareas.map(tarea => tarea.id === id ? tareaActualizada : tarea);
     });
@@ -46,6 +43,7 @@ const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPend
           <p><strong>Email:</strong> {usuario.email}</p>
           <button className="bg-red-500 text-white mt-4 p-2 rounded" onClick={handleDeleteUser}>Eliminar usuario</button>
           <button className="bg-blue-500 text-white mt-4 p-2 rounded" onClick={handleLogout}>Cerrar sesión</button>
+          <button className="bg-green-500 text-white mt-4 p-2 rounded">Editar perfil</button>
         </div>
       )}
       <h1 className='text-center m-4'>Bienvenido a mi sitio web</h1>

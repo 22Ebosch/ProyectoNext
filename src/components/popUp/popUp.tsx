@@ -1,5 +1,6 @@
 import React from 'react';
 import FormTarea from '@/components/formTarea/formTarea';
+import FormEditarUsuario from '@/components/formEditarUsuario/formEditarUsuario';
 
 function PopUp({ onClose, onUpdate, tarea }) {
     return (

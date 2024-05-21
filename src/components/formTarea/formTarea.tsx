@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { crearTarea, actualizarTarea } from '@/lib/data'
 
 const FormTarea = ({ onClose, onUpdate, tarea }) => {
+  
     const [formData, setFormData] = useState({
       titulo: '',
       descripcion: '',

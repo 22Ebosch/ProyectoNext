@@ -2,6 +2,7 @@ import React from 'react';
 import { eliminarTarea } from '@/lib/data';
 
 const Tarea = ({ tarea, onUpdate, onEdit }) => {
+  
   const handleDelete = async () => {
     await eliminarTarea(tarea.id);
     onUpdate();
