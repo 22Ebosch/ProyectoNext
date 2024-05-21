@@ -22,24 +22,26 @@ const FormUsuario = ({ onLogin }) => {
     };
   
     const handleLogin = async (e) => {
-        e.preventDefault();
-        const usuarios = await obtenerUsuarios();
-        const usuarioValido = usuarios.find(usuario => usuario.email === email && usuario.contrasena === contrasena);
-        if (usuarioValido) {
-          setUsuario(usuarioValido);
-          onLogin(usuarioValido);
-        } else {
-          alert('Email o contraseña incorrectos.');
-        }
-      };
+      e.preventDefault();
+      const usuarios = await obtenerUsuarios();
+      const usuarioValido = usuarios.find(usuario => usuario.email === email && usuario.contrasena === contrasena);
+      if (usuarioValido) {
+        setUsuario(usuarioValido);
+        onLogin(usuarioValido);
+        localStorage.setItem('usuario', JSON.stringify(usuarioValido));
+      } else {
+        alert('Email o contraseña incorrectos.');
+      }
+    };
+    
       
   
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
           <form className="p-8 bg-white rounded shadow-md w-80">
             <h2 className="text-2xl font-bold mb-8 text-center">Iniciar sesión / Registrarse</h2>
-            <input className="mb-4 w-full px-3 py-2 border border-gray-300 rounded" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-            <input className="mb-4 w-full px-3 py-2 border border-gray-300 rounded" type="password" value={contrasena} onChange={(e) => setContrasena(e.target.value)} placeholder="Contraseña" required />
+            <input className="mb-4 text-black w-full px-3 py-2 border border-gray-300 rounded" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+            <input className="mb-4 text-black w-full px-3 py-2 border border-gray-300 rounded" type="password" value={contrasena} onChange={(e) => setContrasena(e.target.value)} placeholder="Contraseña" required />
             <button className="mb-2 w-full px-3 py-2 bg-blue-500 text-white rounded" type="button" onClick={handleRegister}>Registrarse</button>
             <button className="w-full px-3 py-2 bg-green-500 text-white rounded" type="button" onClick={handleLogin}>Iniciar sesión</button>
           </form>

@@ -18,6 +18,11 @@ const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPend
     onLogout();
   };
 
+  const handleLogout = async () => {
+    localStorage.removeItem('usuario');
+    onLogout();
+  };
+  
   const handleDrop = async (e, nuevaCategoria) => {
     let id = e.dataTransfer.getData('tarea_id');
     // Actualiza el estado de la tarea en la base de datos
@@ -28,6 +33,7 @@ const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPend
       return prevTareas.map(tarea => tarea.id === id ? tareaActualizada : tarea);
     });
   };
+
   useEffect(() => {
     console.log('Valor actual de isOpen:', isOpen);
     console.log('Usuario:', usuario);
@@ -39,6 +45,7 @@ const Kanban = ({ onLogout, usuario, onUpdate, onEdit, onButtonClick, tareasPend
         <div className="absolute right-4 mt-12 bg-white text-black p-4 rounded shadow-md">
           <p><strong>Email:</strong> {usuario.email}</p>
           <button className="bg-red-500 text-white mt-4 p-2 rounded" onClick={handleDeleteUser}>Eliminar usuario</button>
+          <button className="bg-blue-500 text-white mt-4 p-2 rounded" onClick={handleLogout}>Cerrar sesión</button>
         </div>
       )}
       <h1 className='text-center m-4'>Bienvenido a mi sitio web</h1>

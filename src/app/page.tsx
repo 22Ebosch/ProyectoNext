@@ -44,8 +44,15 @@ const HomePage = () => {
   };
   
   useEffect(() => {
+    const usuarioAlmacenado = localStorage.getItem('usuario');
+    if (usuarioAlmacenado) {
+      setIsLoggedIn(true);
+      setUsuario(JSON.parse(usuarioAlmacenado));
+    }
     handleUpdate();
   }, []);
+  
+  
 
   if (!isLoggedIn) {
     return <FormUsuario onLogin={(usuarioValido) => {
